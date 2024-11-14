@@ -1,6 +1,9 @@
 plugins {
     id("com.android.library")
     alias(libs.plugins.kotlin.android)
+
+    kotlin("kapt")
+    alias(libs.plugins.hilt.android)
 }
 
 android {
@@ -39,4 +42,8 @@ dependencies {
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.okhttp)
     implementation(libs.retrofit)
+
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 }
