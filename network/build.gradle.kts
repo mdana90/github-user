@@ -27,6 +27,9 @@ android {
             )
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
     compileOptions {
         sourceCompatibility = rootProject.extra.get("javaVersion") as JavaVersion
         targetCompatibility = rootProject.extra.get("javaVersion") as JavaVersion
@@ -47,4 +50,9 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    // Flipper
+    debugImplementation(libs.flipper)
+    debugImplementation(libs.flipper.network.plugin)
+    releaseImplementation(libs.flipper.android.no.op)
 }

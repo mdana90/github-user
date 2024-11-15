@@ -38,6 +38,7 @@ android {
         jvmTarget = rootProject.extra.get("kotlinJvmTarget") as String
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     composeOptions {
@@ -65,6 +66,12 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    // Flipper
+    debugImplementation(libs.flipper)
+    debugImplementation(libs.flipper.network.plugin)
+    debugImplementation(libs.soloader)
+    releaseImplementation(libs.flipper.android.no.op)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
