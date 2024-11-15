@@ -1,5 +1,6 @@
 plugins {
     id("com.android.library")
+    id("org.jetbrains.kotlin.plugin.serialization")
     alias(libs.plugins.kotlin.android)
 
     kotlin("kapt")
