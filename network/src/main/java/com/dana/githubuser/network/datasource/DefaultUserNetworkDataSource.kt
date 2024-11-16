@@ -7,8 +7,11 @@ import com.dana.githubuser.network.api.UserApi
 import com.dana.githubuser.network.mapper.toUser
 import retrofit2.HttpException
 import java.io.IOException
+import javax.inject.Inject
 
-internal class DefaultUserNetworkDataSource(private val userApi: UserApi) : UserNetworkDataSource {
+internal class DefaultUserNetworkDataSource @Inject constructor(
+    private val userApi: UserApi
+) : UserNetworkDataSource {
     override suspend fun getUser(username: String): Result<User> {
         return try {
             Result.Success(userApi.getUser(username).toUser())
