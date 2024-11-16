@@ -1,7 +1,8 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.plugin.serialization")
+
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.serialization)
 
     kotlin("kapt")
     alias(libs.plugins.hilt.android)
@@ -40,6 +41,8 @@ android {
 }
 
 dependencies {
+    api(project(mapOf("path" to ":model")))
+
     implementation(libs.kotlinx.serialization.json)
 
     // Retrofit
