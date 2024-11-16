@@ -53,6 +53,9 @@ android {
 
 dependencies {
 
+    implementation(project(":feature:userrepository"))
+    implementation(project(":model"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
