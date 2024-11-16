@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 rootProject.name = "Github User"
 include(":app")
 include(":network")
+include(":model")
