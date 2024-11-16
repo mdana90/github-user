@@ -1,5 +1,8 @@
 package com.dana.githubuser.feature.userrepository
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dana.githubuser.data.repository.UserRepository
@@ -14,6 +17,9 @@ import javax.inject.Inject
 class UserRepositoryViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
+    var userProfileUIState by mutableStateOf<UserProfileUIState>(UserProfileUIState.Loading)
+        private set
+
     fun load() {
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
@@ -22,6 +28,7 @@ class UserRepositoryViewModel @Inject constructor(
 
             when (result) {
                 is Result.Success -> {
+                    userProfileUIState = UserProfileUIState.Success(result.data)
                     println("username: ${result.data.username}")
                 }
                 is Result.Error -> {

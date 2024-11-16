@@ -4,10 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dana.githubuser.feature.userrepository.UserRepositoryScreen
 import com.dana.githubuser.feature.userrepository.UserRepositoryViewModel
@@ -21,12 +17,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GithubUserTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    UserRepositoryScreen(
-                        modifier = Modifier.padding(innerPadding),
-                        viewModel = hiltViewModel<UserRepositoryViewModel>()
-                    )
-                }
+                UserRepositoryScreen(
+                    viewModel = hiltViewModel<UserRepositoryViewModel>()
+                )
+
             }
         }
     }
