@@ -17,7 +17,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.dana.githubuser.feature.userrepository.composables.UserProfileSection
+import com.dana.githubuser.feature.userrepository.userprofile.UserProfileSection
+import com.dana.githubuser.feature.userrepository.userprofile.UserProfileUIState
 
 @Composable
 fun UserRepositoryScreen(viewModel: UserRepositoryViewModel) {

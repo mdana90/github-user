@@ -1,4 +1,4 @@
-package com.dana.githubuser.feature.userrepository
+package com.dana.githubuser.feature.userrepository.userprofile
 
 import com.dana.githubuser.model.User
 

@@ -1,4 +1,4 @@
-package com.dana.githubuser.feature.userrepository.composables
+package com.dana.githubuser.feature.userrepository.userprofile
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.border
@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.dana.github.composables.NetworkImage
 import com.dana.githubuser.feature.userrepository.R
-import com.dana.githubuser.feature.userrepository.UserProfileUIState
 
 @Composable
 internal fun UserProfileSection(uiState: UserProfileUIState.Success) {
