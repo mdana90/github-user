@@ -36,12 +36,14 @@ internal fun UserProfileSection(uiState: UserProfileUIState.Success) {
             fontWeight = FontWeight.Medium,
             style = MaterialTheme.typography.bodyLarge
         )
-        Spacer(modifier = Modifier.height(2.dp))
-        Text(
-            text = uiState.name,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            style = MaterialTheme.typography.bodySmall
-        )
+        uiState.name?.let {
+            Spacer(modifier = Modifier.height(2.dp))
+            Text(
+                text = it,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodySmall
+            )
+        }
         Spacer(modifier = Modifier.height(16.dp))
         UserStatisticSection(uiState)
     }

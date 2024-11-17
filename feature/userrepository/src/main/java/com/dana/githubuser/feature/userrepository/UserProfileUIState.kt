@@ -8,7 +8,7 @@ sealed interface UserProfileUIState {
         val username: String
             get() = user.username
 
-        val name: String
+        val name: String?
             get() = user.name
 
         val avatarUrl: String
