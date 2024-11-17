@@ -43,6 +43,7 @@ android {
 
 dependencies {
 
+    implementation(project(mapOf("path" to ":common")))
     implementation(project(mapOf("path" to ":data")))
     implementation(project(mapOf("path" to ":model")))
     implementation(project(mapOf("path" to ":ui:composables")))

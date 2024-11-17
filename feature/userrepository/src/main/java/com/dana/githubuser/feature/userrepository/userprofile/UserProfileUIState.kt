@@ -1,5 +1,6 @@
 package com.dana.githubuser.feature.userrepository.userprofile
 
+import com.dana.githubuser.common.formatToKorM
 import com.dana.githubuser.model.User
 
 sealed interface UserProfileUIState {
@@ -14,10 +15,10 @@ sealed interface UserProfileUIState {
         val avatarUrl: String
             get() = user.avatarUrl
 
-        val followers: Int
-            get() = user.followers
+        val followers: String
+            get() = formatToKorM(user.followers.toLong())
 
-        val following: Int
-            get() = user.following
+        val following: String
+            get() = formatToKorM(user.following.toLong())
     }
 }

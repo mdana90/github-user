@@ -71,12 +71,12 @@ private fun UserStatisticSection(uiState: UserProfileUIState.Success) {
 }
 
 @Composable
-private fun UserStatisticInfo(amount: Int, @StringRes label: Int) {
+private fun UserStatisticInfo(amount: String, @StringRes label: Int) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = amount.toString(),
+            text = amount,
             fontWeight = FontWeight.Medium,
             style = MaterialTheme.typography.bodyMedium
         )
