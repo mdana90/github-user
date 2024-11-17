@@ -1,20 +1,25 @@
 package com.dana.githubuser.feature.userrepository.composables
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dana.github.composables.NetworkImage
 import com.dana.githubuser.feature.userrepository.R
 import com.dana.githubuser.feature.userrepository.UserProfileUIState
 
@@ -24,6 +29,8 @@ internal fun UserProfileSection(uiState: UserProfileUIState.Success) {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
+        UserAvatar(uiState.avatarUrl)
+        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = uiState.username,
             fontWeight = FontWeight.Medium,
@@ -38,6 +45,17 @@ internal fun UserProfileSection(uiState: UserProfileUIState.Success) {
         Spacer(modifier = Modifier.height(16.dp))
         UserStatisticSection(uiState)
     }
+}
+
+@Composable
+private fun UserAvatar(avatarUrl: String) {
+    NetworkImage(
+        modifier = Modifier
+            .size(60.dp)
+            .border(2.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.4f), CircleShape)
+            .clip(CircleShape),
+        imageUrl = avatarUrl,
+    )
 }
 
 @Composable
