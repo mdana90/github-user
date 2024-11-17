@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_profile">Profile</string>
-    <string name="label_followers">Followers</string>
-    <string name="label_followings">Followings</string>
+    <plurals name="label_followers">
+        <item quantity="one">Follower</item>
+        <item quantity="other">Followers</item>
+    </plurals>
+    <plurals name="label_followings">
+        <item quantity="one">Following</item>
+        <item quantity="other">Followings</item>
+    </plurals>
 </resources>

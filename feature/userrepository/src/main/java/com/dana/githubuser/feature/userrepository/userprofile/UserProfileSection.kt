@@ -1,6 +1,5 @@
 package com.dana.githubuser.feature.userrepository.userprofile
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.dana.github.composables.NetworkImage
@@ -65,13 +64,25 @@ private fun UserStatisticSection(uiState: UserProfileUIState.Success) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
-        UserStatisticInfo(amount = uiState.followers, label = R.string.label_followers)
-        UserStatisticInfo(amount = uiState.following, label = R.string.label_followings)
+        UserStatisticInfo(
+            amount = uiState.formattedFollowers,
+            label = pluralStringResource(
+                id = R.plurals.label_followers,
+                count = uiState.followers
+            )
+        )
+        UserStatisticInfo(
+            amount = uiState.formattedFollowing,
+            label = pluralStringResource(
+                id = R.plurals.label_followings,
+                count = uiState.following
+            )
+        )
     }
 }
 
 @Composable
-private fun UserStatisticInfo(amount: String, @StringRes label: Int) {
+private fun UserStatisticInfo(amount: String, label: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -82,7 +93,7 @@ private fun UserStatisticInfo(amount: String, @StringRes label: Int) {
         )
         Spacer(modifier = Modifier.height(2.dp))
         Text(
-            text = stringResource(label),
+            text = label,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             style = MaterialTheme.typography.bodySmall
         )

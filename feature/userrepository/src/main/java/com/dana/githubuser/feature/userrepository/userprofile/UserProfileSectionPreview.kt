@@ -13,7 +13,7 @@ fun PreviewUserProfileSection() {
         avatarUrl = "https://avatars.githubusercontent.com/u/32689599?s=48&v=4",
         name = "Sample User",
         followers = 2290643,
-        following = 50
+        following = 1
     )
     val uiState = UserProfileUIState.Success(sampleUser)
     UserProfileSection(uiState = uiState)

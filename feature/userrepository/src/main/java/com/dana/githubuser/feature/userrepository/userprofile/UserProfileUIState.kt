@@ -15,10 +15,16 @@ sealed interface UserProfileUIState {
         val avatarUrl: String
             get() = user.avatarUrl
 
-        val followers: String
-            get() = formatToKorM(user.followers.toLong())
+        val followers: Int
+            get() = user.followers
 
-        val following: String
-            get() = formatToKorM(user.following.toLong())
+        val following: Int
+            get() = user.following
+
+        val formattedFollowers: String
+            get() = formatToKorM(followers.toLong())
+
+        val formattedFollowing: String
+            get() = formatToKorM(following.toLong())
     }
 }
