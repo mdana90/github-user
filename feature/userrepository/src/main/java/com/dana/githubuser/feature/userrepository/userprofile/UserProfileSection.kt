@@ -22,24 +22,24 @@ import com.dana.github.composables.NetworkImage
 import com.dana.githubuser.feature.userrepository.R
 
 @Composable
-internal fun UserProfileSection(uiState: UserProfileUIState.Success) {
+internal fun UserProfileSection(modifier: Modifier = Modifier, uiState: UserProfileUIState.Success) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         UserAvatar(uiState.avatarUrl)
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = uiState.username,
-            fontWeight = FontWeight.Medium,
-            style = MaterialTheme.typography.bodyLarge
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.titleLarge
         )
         uiState.name?.let {
             Spacer(modifier = Modifier.height(2.dp))
             Text(
                 text = it,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                style = MaterialTheme.typography.bodySmall
+                style = MaterialTheme.typography.bodyMedium
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -51,7 +51,7 @@ internal fun UserProfileSection(uiState: UserProfileUIState.Success) {
 private fun UserAvatar(avatarUrl: String) {
     NetworkImage(
         modifier = Modifier
-            .size(60.dp)
+            .size(76.dp)
             .border(2.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.4f), CircleShape)
             .clip(CircleShape),
         imageUrl = avatarUrl,
@@ -89,13 +89,13 @@ private fun UserStatisticInfo(amount: String, label: String) {
         Text(
             text = amount,
             fontWeight = FontWeight.Medium,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyLarge
         )
         Spacer(modifier = Modifier.height(2.dp))
         Text(
             text = label,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            style = MaterialTheme.typography.bodySmall
+            style = MaterialTheme.typography.bodyMedium
         )
     }
 }
