@@ -15,10 +15,9 @@ internal class DefaultUserRepository @Inject constructor(
 
     override suspend fun getUserRepositories(
         username: String,
-        page: Int,
-        perPage: Int
+        page: Int
     ): Result<List<Repository>> {
-        return userNetworkDataSource.getUserRepositories(username, page, perPage)
+        return userNetworkDataSource.getUserRepositories(username, page, PER_PAGE)
     }
 
     override suspend fun getUserList(since: Int): Result<List<User>> {

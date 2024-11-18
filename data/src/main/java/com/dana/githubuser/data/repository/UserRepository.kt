@@ -8,8 +8,7 @@ interface UserRepository {
     suspend fun getUser(username: String): Result<User>
     suspend fun getUserRepositories(
         username: String,
-        page: Int,
-        perPage: Int
+        page: Int
     ): Result<List<Repository>>
 
     suspend fun getUserList(since: Int): Result<List<User>>

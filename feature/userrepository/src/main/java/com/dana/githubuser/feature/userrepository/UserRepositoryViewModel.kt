@@ -62,7 +62,7 @@ class UserRepositoryViewModel @Inject constructor(
         isLoadingRepositories = true
         viewModelScope.launch {
             val result = withContext(dispatcher) {
-                userRepository.getUserRepositories(username, currentPage, PER_PAGE)
+                userRepository.getUserRepositories(username, currentPage)
             }
             when (result) {
                 is Result.Success -> {
@@ -81,6 +81,5 @@ class UserRepositoryViewModel @Inject constructor(
 
     companion object {
         private const val FIRST_PAGE = 1
-        private const val PER_PAGE = 20
     }
 }
