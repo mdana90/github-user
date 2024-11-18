@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dana.githubuser.common.di.IoDispatcher
 import com.dana.githubuser.data.repository.UserRepository
 import com.dana.githubuser.feature.userrepository.repositorylist.RepositoryUIState
 import com.dana.githubuser.feature.userrepository.repositorylist.toUIState
@@ -14,14 +15,15 @@ import com.dana.githubuser.feature.userrepository.userprofile.toUIState
 import com.dana.githubuser.model.Repository
 import com.dana.githubuser.model.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class UserRepositoryViewModel @Inject constructor(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
     var userProfileUIState by mutableStateOf<UserProfileUIState>(UserProfileUIState.Loading)
         private set
@@ -37,7 +39,7 @@ class UserRepositoryViewModel @Inject constructor(
 
     fun load() {
         viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) {
+            val result = withContext(dispatcher) {
                 userRepository.getUser(username)
             }
 
@@ -59,7 +61,7 @@ class UserRepositoryViewModel @Inject constructor(
 
         isLoadingRepositories = true
         viewModelScope.launch {
-            val result = withContext(Dispatchers.IO) {
+            val result = withContext(dispatcher) {
                 userRepository.getUserRepositories(username, currentPage, PER_PAGE)
             }
             when (result) {
