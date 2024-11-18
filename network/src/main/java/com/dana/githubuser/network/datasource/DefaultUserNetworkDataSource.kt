@@ -7,6 +7,7 @@ import com.dana.githubuser.network.UserNetworkDataSource
 import com.dana.githubuser.network.api.UserApi
 import com.dana.githubuser.network.mapper.toRepository
 import com.dana.githubuser.network.mapper.toUser
+import com.dana.githubuser.network.response.RepositoryResponse
 import com.dana.githubuser.network.response.UserResponse
 import com.dana.githubuser.network.util.apiCall
 import javax.inject.Inject
@@ -25,7 +26,8 @@ internal class DefaultUserNetworkDataSource @Inject constructor(
     ): Result<List<Repository>> {
         return apiCall { Result.Success(userApi.getUserRepositories(username, page, perPage)
             .filter { !it.fork }
-            .map { it.toRepository() }) }
+            .map(RepositoryResponse::toRepository))
+        }
     }
 
     override suspend fun getUserList(since: Int, perPage: Int): Result<List<User>> {
