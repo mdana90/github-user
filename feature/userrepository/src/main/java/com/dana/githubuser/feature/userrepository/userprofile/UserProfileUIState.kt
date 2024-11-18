@@ -5,22 +5,13 @@ import com.dana.githubuser.model.User
 
 sealed interface UserProfileUIState {
     data object Loading : UserProfileUIState
-    data class Success(private val user: User) : UserProfileUIState {
-        val username: String
-            get() = user.username
-
-        val name: String?
-            get() = user.name
-
-        val avatarUrl: String
-            get() = user.avatarUrl
-
-        val followers: Int
-            get() = user.followers
-
+    data class Success(
+        val username: String,
+        val name: String?,
+        val avatarUrl: String,
+        val followers: Int,
         val following: Int
-            get() = user.following
-
+    ) : UserProfileUIState {
         val formattedFollowers: String
             get() = formatToKorM(followers.toLong())
 
@@ -28,3 +19,11 @@ sealed interface UserProfileUIState {
             get() = formatToKorM(following.toLong())
     }
 }
+
+internal fun User.toUIState() = UserProfileUIState.Success(
+    username = username,
+    name = name,
+    avatarUrl = avatarUrl,
+    followers = followers,
+    following = following
+)

@@ -10,6 +10,7 @@ import com.dana.githubuser.data.repository.UserRepository
 import com.dana.githubuser.feature.userrepository.repositorylist.RepositoryUIState
 import com.dana.githubuser.feature.userrepository.repositorylist.toUIState
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileUIState
+import com.dana.githubuser.feature.userrepository.userprofile.toUIState
 import com.dana.githubuser.model.Repository
 import com.dana.githubuser.model.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -42,7 +43,7 @@ class UserRepositoryViewModel @Inject constructor(
 
             when (result) {
                 is Result.Success -> {
-                    userProfileUIState = UserProfileUIState.Success(result.data)
+                    userProfileUIState = result.data.toUIState()
                     canLoadRepositories = true
                     loadRepositories()
                 }
