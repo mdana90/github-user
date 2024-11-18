@@ -34,7 +34,7 @@ class UserRepositoryViewModel @Inject constructor(
     val repositories: List<RepositoryUIState> = _repositories
 
     private val username = "mojombo"
-    private var currentPage = 1
+    private var currentPage = FIRST_PAGE
     private var canLoadRepositories = false
 
     fun load() {
@@ -66,7 +66,7 @@ class UserRepositoryViewModel @Inject constructor(
             }
             when (result) {
                 is Result.Success -> {
-                    if (currentPage == 1) _repositories.clear()
+                    if (currentPage == FIRST_PAGE) _repositories.clear()
                     _repositories.addAll(result.data.map(Repository::toUIState))
                     currentPage++
                     canLoadRepositories = result.data.isNotEmpty()
@@ -80,6 +80,7 @@ class UserRepositoryViewModel @Inject constructor(
     }
 
     companion object {
+        private const val FIRST_PAGE = 1
         private const val PER_PAGE = 20
     }
 }
