@@ -5,8 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.dana.githubuser.feature.userrepository.UserRepositoryScreen
-import com.dana.githubuser.feature.userrepository.UserRepositoryViewModel
+import com.dana.githubuser.feature.userlist.UserListScreen
+import com.dana.githubuser.feature.userlist.UserListViewModel
 import com.dana.githubuser.ui.theme.GithubUserTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,10 +17,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GithubUserTheme {
-                UserRepositoryScreen(
+                /*UserRepositoryScreen(
                     viewModel = hiltViewModel<UserRepositoryViewModel>()
-                )
+                )*/
 
+                UserListScreen(viewModel = hiltViewModel<UserListViewModel>())
             }
         }
     }

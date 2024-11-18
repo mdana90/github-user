@@ -53,6 +53,7 @@ android {
 
 dependencies {
 
+    implementation(project(":feature:userlist"))
     implementation(project(":feature:userrepository"))
     implementation(project(":model"))
 
