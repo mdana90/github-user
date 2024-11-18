@@ -5,6 +5,7 @@ import com.dana.githubuser.network.response.UserResponse
 
 fun UserResponse.toUser() : User {
     return User(
+        id = id,
         username = login,
         avatarUrl = avatarUrl,
         name = name,

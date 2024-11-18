@@ -5,4 +5,5 @@ object UrlConstants {
 
     const val USER_BY_USERNAME = "users/{username}"
     const val USER_REPOSITORIES = "users/{username}/repos"
+    const val USER_USER_LIST = "users"
 }

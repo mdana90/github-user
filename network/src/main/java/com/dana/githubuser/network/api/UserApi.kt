@@ -17,4 +17,10 @@ interface UserApi {
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): List<RepositoryResponse>
+
+    @GET(UrlConstants.USER_USER_LIST)
+    suspend fun getUserList(
+        @Query("since") since: Int,
+        @Query("per_page") perPage: Int
+    ): List<UserResponse>
 }

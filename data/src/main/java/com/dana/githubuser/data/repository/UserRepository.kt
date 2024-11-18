@@ -11,4 +11,6 @@ interface UserRepository {
         page: Int,
         perPage: Int
     ): Result<List<Repository>>
+
+    suspend fun getUserList(since: Int): Result<List<User>>
 }
