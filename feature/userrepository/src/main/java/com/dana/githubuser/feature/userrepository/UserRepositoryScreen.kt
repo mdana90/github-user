@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -17,6 +18,8 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dana.github.composables.EndlessLazyColumn
+import com.dana.githubuser.feature.userrepository.repositorylist.RepositoryItem
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileSection
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileUIState
 
@@ -30,10 +33,19 @@ fun UserRepositoryScreen(viewModel: UserRepositoryViewModel) {
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(horizontal = 16.dp)
         ) {
             if (userUIState is UserProfileUIState.Success) {
-                UserProfileSection(userUIState)
+                EndlessLazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    items = mutableListOf<@Composable () -> Unit>().apply {
+                        add { UserProfileSection(Modifier.padding(16.dp), userUIState) }
+                        addAll(viewModel.repositories.map { { RepositoryItem(uiState = it) } })
+                    } ,
+                    divider = { HorizontalDivider(thickness = 0.5.dp) },
+                    loadMore = viewModel::loadRepositories,
+                    isLoadingMoreData = viewModel.isLoadingRepositories
+                )
             }
         }
     }
