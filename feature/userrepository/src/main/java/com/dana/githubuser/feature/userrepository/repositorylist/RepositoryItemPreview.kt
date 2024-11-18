@@ -5,7 +5,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewRepositoryItem() {
+fun RepositoryItemPreview() {
     val sampleRepository = RepositoryUIState(
         name = "Sample Repository",
         description = "This is a sample repository description.",
