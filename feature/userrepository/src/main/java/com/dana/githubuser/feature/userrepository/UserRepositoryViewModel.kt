@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dana.githubuser.common.di.IoDispatcher
@@ -23,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class UserRepositoryViewModel @Inject constructor(
     private val userRepository: UserRepository,
-    @IoDispatcher private val dispatcher: CoroutineDispatcher
+    @IoDispatcher private val dispatcher: CoroutineDispatcher,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     var userProfileUIState by mutableStateOf<UserProfileUIState>(UserProfileUIState.Loading)
         private set
@@ -33,7 +35,7 @@ class UserRepositoryViewModel @Inject constructor(
     private val _repositories = mutableStateListOf<RepositoryUIState>()
     val repositories: List<RepositoryUIState> = _repositories
 
-    private val username = "mojombo"
+    private val username = savedStateHandle[UserRepositoryArgs.username] ?: ""
     private var currentPage = FIRST_PAGE
     private var canLoadRepositories = false
 

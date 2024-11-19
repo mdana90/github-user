@@ -1,5 +1,6 @@
 package com.dana.githubuser.feature.userrepository
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -24,9 +25,9 @@ import com.dana.githubuser.feature.userrepository.userprofile.UserProfileSection
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileUIState
 
 @Composable
-fun UserRepositoryScreen(viewModel: UserRepositoryViewModel) {
+fun UserRepositoryScreen(viewModel: UserRepositoryViewModel, onBackClick: () -> Unit) {
     Scaffold(modifier = Modifier.fillMaxSize(),
-        topBar = { TopBar() }
+        topBar = { TopBar(onBackClick = onBackClick) }
     ) { innerPadding ->
         val userUIState = viewModel.userProfileUIState
         Column(
@@ -57,7 +58,7 @@ fun UserRepositoryScreen(viewModel: UserRepositoryViewModel) {
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun TopBar() {
+private fun TopBar(onBackClick: () -> Unit) {
     TopAppBar(
         modifier = Modifier.shadow(elevation = 4.dp),
         title = {
@@ -69,7 +70,8 @@ private fun TopBar() {
         },
         navigationIcon = {
             Icon(
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier.padding(8.dp)
+                    .clickable { onBackClick() },
                 imageVector = Icons.Default.ArrowBack,
                 contentDescription = "Back"
             )

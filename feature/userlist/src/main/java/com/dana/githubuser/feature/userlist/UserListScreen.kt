@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.dana.github.composables.EndlessLazyColumn
 
 @Composable
-fun UserListScreen(viewModel: UserListViewModel) {
+fun UserListScreen(viewModel: UserListViewModel, onUserClick: (String) -> Unit) {
     Scaffold(modifier = Modifier.fillMaxSize(),
         topBar = { TopBar() }
     ) { innerPadding ->
@@ -30,7 +30,8 @@ fun UserListScreen(viewModel: UserListViewModel) {
             UserList(
                 userList = viewModel.userList,
                 isLoadingMore = viewModel.isLoadingMore,
-                loadMore = viewModel::loadMore
+                loadMore = viewModel::loadMore,
+                onUserClick = onUserClick
             )
         }
     }
@@ -44,13 +45,14 @@ fun UserListScreen(viewModel: UserListViewModel) {
 private fun UserList(
     userList: List<UserUIState>,
     isLoadingMore: Boolean,
-    loadMore: () -> Unit = {}
+    loadMore: () -> Unit,
+    onUserClick: (String) -> Unit
 ) {
     EndlessLazyColumn(
         modifier = Modifier
             .fillMaxSize(),
         items = userList.map {
-            { UserItem(uiState = it, onClick = {}) }
+            { UserItem(uiState = it, onClick = { onUserClick(it.username) }) }
         },
         divider = { HorizontalDivider(thickness = 0.5.dp) },
         loadMore = loadMore,
