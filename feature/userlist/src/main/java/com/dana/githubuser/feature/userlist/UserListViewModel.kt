@@ -28,6 +28,8 @@ class UserListViewModel @Inject constructor(
     var isLoadingMore by mutableStateOf(false)
         private set
 
+    var snackBarMessage by mutableStateOf<String?>(null)
+
     private var since = INITIAL_SINCE
     private var canLoadMore = false
 
@@ -44,13 +46,19 @@ class UserListViewModel @Inject constructor(
             when (result) {
                 is Result.Success -> {
                     contentUIState = ContentUIState.Success(result.data.map(User::toUIState))
-                    canLoadMore = true
+                    canLoadMore = result.data.isNotEmpty()
                     if (result.data.isNotEmpty()) {
                         since = result.data.last().id
                     }
                 }
                 is Result.Error -> {
-                    contentUIState = ContentUIState.Error(result.message)
+                    contentUIState.let {
+                        if (it is ContentUIState.Success && it.users.isNotEmpty()) {
+                            snackBarMessage = result.message
+                        } else {
+                            contentUIState = ContentUIState.Error(result.message)
+                        }
+                    }
                 }
             }
             isRefreshing = false
@@ -78,11 +86,15 @@ class UserListViewModel @Inject constructor(
                     canLoadMore = result.data.isNotEmpty()
                 }
                 is Result.Error -> {
-                    println("error: ${result.exception.message}")
+                    snackBarMessage = result.message
                 }
             }
             isLoadingMore = false
         }
+    }
+
+    fun onDialogDismissed() {
+        snackBarMessage = null
     }
 
     companion object {
