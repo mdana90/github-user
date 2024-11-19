@@ -64,7 +64,7 @@ private fun TopBar(onBackClick: () -> Unit) {
         title = {
             Text(
                 modifier = Modifier.padding(start = 8.dp),
-                text = stringResource(id = R.string.title_profile),
+                text = stringResource(id = R.string.title_repository),
                 fontWeight = FontWeight.W500
             )
         },
