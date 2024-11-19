@@ -1,7 +1,6 @@
 package com.dana.githubuser.feature.userlist
 
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -22,9 +21,8 @@ class UserListViewModel @Inject constructor(
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _userList = mutableStateListOf<UserUIState>()
-    val userList: List<UserUIState> = _userList
-
+    var contentUIState by mutableStateOf<ContentUIState>(ContentUIState.Success(emptyList()))
+        private set
     var isRefreshing by mutableStateOf(false)
         private set
     var isLoadingMore by mutableStateOf(false)
@@ -45,15 +43,14 @@ class UserListViewModel @Inject constructor(
 
             when (result) {
                 is Result.Success -> {
-                    _userList.clear()
-                    _userList.addAll(result.data.map(User::toUIState))
+                    contentUIState = ContentUIState.Success(result.data.map(User::toUIState))
                     canLoadMore = true
                     if (result.data.isNotEmpty()) {
                         since = result.data.last().id
                     }
                 }
                 is Result.Error -> {
-                    println("error: ${result.exception.message}")
+                    contentUIState = ContentUIState.Error(result.message)
                 }
             }
             isRefreshing = false
@@ -62,6 +59,7 @@ class UserListViewModel @Inject constructor(
 
     fun loadMore() {
         if (!canLoadMore || isLoadingMore) return
+        val uiState = contentUIState as? ContentUIState.Success ?: return
 
         isLoadingMore = true
         viewModelScope.launch {
@@ -71,8 +69,9 @@ class UserListViewModel @Inject constructor(
 
             when (result) {
                 is Result.Success -> {
-                    println("load: ${result.data.map { it.username }}")
-                    _userList.addAll(result.data.map(User::toUIState))
+                    contentUIState = ContentUIState.Success(
+                        uiState.users + result.data.map(User::toUIState)
+                    )
                     if (result.data.isNotEmpty()) {
                         since = result.data.last().id
                     }

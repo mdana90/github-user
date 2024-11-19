@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.dana.github.composables.EndlessLazyColumn
+import com.dana.github.composables.ErrorView
 
 @Composable
 fun UserListScreen(viewModel: UserListViewModel, onUserClick: (String) -> Unit) {
@@ -27,12 +28,23 @@ fun UserListScreen(viewModel: UserListViewModel, onUserClick: (String) -> Unit) 
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            UserList(
-                userList = viewModel.userList,
-                isLoadingMore = viewModel.isLoadingMore,
-                loadMore = viewModel::loadMore,
-                onUserClick = onUserClick
-            )
+            when (val contentUIState = viewModel.contentUIState) {
+                is ContentUIState.Success -> {
+                    UserList(
+                        userList = contentUIState.users,
+                        isLoadingMore = viewModel.isLoadingMore,
+                        loadMore = viewModel::loadMore,
+                        onUserClick = onUserClick
+                    )
+                }
+                is ContentUIState.Error -> {
+                    ErrorView(
+                        modifier = Modifier.align(Alignment.Center),
+                        message = contentUIState.message,
+                        onRetryClicked = viewModel::refresh
+                    )
+                }
+            }
         }
     }
 
