@@ -34,6 +34,8 @@ class UserRepositoryViewModel @Inject constructor(
     var isRefreshing by mutableStateOf(false)
         private set
 
+    var snackBarMessage by mutableStateOf<String?>(null)
+
     private val _repositories = mutableStateListOf<RepositoryUIState>()
     val repositories: List<RepositoryUIState> = _repositories
 
@@ -79,11 +81,15 @@ class UserRepositoryViewModel @Inject constructor(
                     canLoadRepositories = result.data.isNotEmpty()
                 }
                 is Result.Error -> {
-                    println("error: ${result.exception.message}")
+                    snackBarMessage = result.message
                 }
             }
             isLoadingRepositories = false
         }
+    }
+
+    fun onDialogDismissed() {
+        snackBarMessage = null
     }
 
     companion object {
