@@ -31,6 +31,8 @@ class UserRepositoryViewModel @Inject constructor(
         private set
     var isLoadingRepositories by mutableStateOf(false)
         private set
+    var isRefreshing by mutableStateOf(false)
+        private set
 
     private val _repositories = mutableStateListOf<RepositoryUIState>()
     val repositories: List<RepositoryUIState> = _repositories
@@ -39,12 +41,14 @@ class UserRepositoryViewModel @Inject constructor(
     private var currentPage = FIRST_PAGE
     private var canLoadRepositories = false
 
-    fun load() {
+    fun refresh() {
+        if (isRefreshing) return
+
+        isRefreshing = true
         viewModelScope.launch {
             val result = withContext(dispatcher) {
                 userRepository.getUser(username)
             }
-
             when (result) {
                 is Result.Success -> {
                     userProfileUIState = result.data.toUIState()
@@ -55,6 +59,7 @@ class UserRepositoryViewModel @Inject constructor(
                     userProfileUIState = UserProfileUIState.Error(result.message)
                 }
             }
+            isRefreshing = false
         }
     }
 

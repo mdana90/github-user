@@ -1,7 +1,6 @@
 package com.dana.githubuser.feature.userrepository
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -12,6 +11,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -25,17 +25,20 @@ import com.dana.githubuser.feature.userrepository.repositorylist.RepositoryItem
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileSection
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileUIState
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserRepositoryScreen(viewModel: UserRepositoryViewModel, onBackClick: () -> Unit) {
     Scaffold(modifier = Modifier.fillMaxSize(),
         topBar = { TopBar(onBackClick = onBackClick) }
     ) { innerPadding ->
         val userUIState = viewModel.userProfileUIState
-        Column(
+        PullToRefreshBox(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .padding(horizontal = 16.dp)
+                .padding(horizontal = 16.dp),
+            isRefreshing = viewModel.isRefreshing,
+            onRefresh = viewModel::refresh
         ) {
             if (userUIState is UserProfileUIState.Success) {
                 EndlessLazyColumn(
@@ -52,14 +55,14 @@ fun UserRepositoryScreen(viewModel: UserRepositoryViewModel, onBackClick: () -> 
                 ErrorView(
                     modifier = Modifier.fillMaxSize(),
                     message = userUIState.message,
-                    onRetryClicked = viewModel::load
+                    onRetryClicked = viewModel::refresh
                 )
             }
         }
     }
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.load()
+        viewModel.refresh()
     }
 }
 
