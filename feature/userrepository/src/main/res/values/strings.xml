@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_repository">Repository</string>
+    <string name="empty_state_repository">%s doesn\'t have any public repositories yet.</string>
     <plurals name="label_followers">
         <item quantity="one">Follower</item>
         <item quantity="other">Followers</item>

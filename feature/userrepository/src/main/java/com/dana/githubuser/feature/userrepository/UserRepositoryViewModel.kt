@@ -33,6 +33,8 @@ class UserRepositoryViewModel @Inject constructor(
         private set
     var isRefreshing by mutableStateOf(false)
         private set
+    var showEmptyRepositories by mutableStateOf(false)
+        private set
 
     var snackBarMessage by mutableStateOf<String?>(null)
 
@@ -75,7 +77,10 @@ class UserRepositoryViewModel @Inject constructor(
             }
             when (result) {
                 is Result.Success -> {
-                    if (currentPage == FIRST_PAGE) _repositories.clear()
+                    if (currentPage == FIRST_PAGE) {
+                        _repositories.clear()
+                        showEmptyRepositories = result.data.isEmpty()
+                    }
                     _repositories.addAll(result.data.map(Repository::toUIState))
                     currentPage++
                     canLoadRepositories = result.data.isNotEmpty()
