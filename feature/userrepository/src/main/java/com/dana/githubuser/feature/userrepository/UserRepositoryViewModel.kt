@@ -52,7 +52,7 @@ class UserRepositoryViewModel @Inject constructor(
                     loadRepositories()
                 }
                 is Result.Error -> {
-                    println("error: ${result.exception}")
+                    userProfileUIState = UserProfileUIState.Error(result.message)
                 }
             }
         }

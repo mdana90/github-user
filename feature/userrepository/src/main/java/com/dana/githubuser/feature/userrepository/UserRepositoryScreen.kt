@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.dana.github.composables.EndlessLazyColumn
+import com.dana.github.composables.ErrorView
 import com.dana.githubuser.feature.userrepository.repositorylist.RepositoryItem
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileSection
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileUIState
@@ -47,6 +48,12 @@ fun UserRepositoryScreen(viewModel: UserRepositoryViewModel, onBackClick: () -> 
                     loadMore = viewModel::loadRepositories,
                     isLoadingMoreData = viewModel.isLoadingRepositories
                 )
+            } else if (userUIState is UserProfileUIState.Error) {
+                ErrorView(
+                    modifier = Modifier.fillMaxSize(),
+                    message = userUIState.message,
+                    onRetryClicked = viewModel::load
+                )
             }
         }
     }
@@ -70,7 +77,8 @@ private fun TopBar(onBackClick: () -> Unit) {
         },
         navigationIcon = {
             Icon(
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier
+                    .padding(8.dp)
                     .clickable { onBackClick() },
                 imageVector = Icons.Default.ArrowBack,
                 contentDescription = "Back"

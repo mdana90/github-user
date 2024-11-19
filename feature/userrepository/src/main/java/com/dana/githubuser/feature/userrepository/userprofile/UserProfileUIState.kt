@@ -5,6 +5,7 @@ import com.dana.githubuser.model.User
 
 sealed interface UserProfileUIState {
     data object Loading : UserProfileUIState
+    data class Error(val message: String): UserProfileUIState
     data class Success(
         val username: String,
         val name: String?,
