@@ -1,6 +1,7 @@
 package com.dana.githubuser.feature.userrepository.repositorylist
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,9 +22,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RepositoryItem(modifier: Modifier = Modifier, uiState: RepositoryUIState) {
+fun RepositoryItem(
+    modifier: Modifier = Modifier,
+    uiState: RepositoryUIState,
+    onClick: (String) -> Unit
+) {
     Column(
         modifier = modifier
+            .clickable { onClick(uiState.url) }
             .fillMaxWidth()
             .background(color = MaterialTheme.colorScheme.surface)
             .padding(16.dp)

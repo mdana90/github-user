@@ -1,9 +1,13 @@
 package com.dana.githubuser
 
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -26,6 +30,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GithubUserTheme {
+                val context = LocalContext.current
                 val navController = rememberNavController()
 
                 NavHost(navController = navController, startDestination = NavRoutes.UserList.route) {
@@ -34,7 +39,6 @@ class MainActivity : ComponentActivity() {
                             viewModel = hiltViewModel<UserListViewModel>(),
                             onUserClick = { username ->
                                 navController.navigate(NavRoutes.UserRepository.createRoute(username))
-
                             }
                         )
                     }
@@ -44,11 +48,21 @@ class MainActivity : ComponentActivity() {
                     ) {
                         UserRepositoryScreen(
                             viewModel = hiltViewModel<UserRepositoryViewModel>(),
-                            onBackClick = { navController.popBackStack() }
+                            onBackClick = { navController.popBackStack() },
+                            onRepositoryClick = { url ->
+                                openWebPage(context, url)
+                            }
                         )
                     }
                 }
             }
         }
+    }
+
+    private fun openWebPage(context: Context, url: String) {
+        val customTabsIntent = CustomTabsIntent.Builder()
+            .setShowTitle(true)
+            .build()
+        customTabsIntent.launchUrl(context, Uri.parse(url))
     }
 }

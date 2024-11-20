@@ -37,7 +37,11 @@ import com.dana.githubuser.feature.userrepository.userprofile.UserProfileUIState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UserRepositoryScreen(viewModel: UserRepositoryViewModel, onBackClick: () -> Unit) {
+fun UserRepositoryScreen(
+    viewModel: UserRepositoryViewModel,
+    onBackClick: () -> Unit,
+    onRepositoryClick: (String) -> Unit
+) {
     val snackBarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
 
@@ -65,7 +69,9 @@ fun UserRepositoryScreen(viewModel: UserRepositoryViewModel, onBackClick: () -> 
                                EmptyRepositoriesMessage(userUIState)
                            }
                         } else {
-                            addAll(viewModel.repositories.map { { RepositoryItem(uiState = it) } })
+                            addAll(viewModel.repositories.map {
+                                { RepositoryItem(uiState = it, onClick = onRepositoryClick) }
+                            })
                         }
                     } ,
                     divider = { HorizontalDivider(thickness = 0.5.dp) },
@@ -88,7 +94,6 @@ fun UserRepositoryScreen(viewModel: UserRepositoryViewModel, onBackClick: () -> 
         snackBarHostState = snackBarHostState,
         onDismissed = viewModel::onDialogDismissed
     )
-
 
     LaunchedEffect(key1 = Unit) {
         viewModel.refresh()

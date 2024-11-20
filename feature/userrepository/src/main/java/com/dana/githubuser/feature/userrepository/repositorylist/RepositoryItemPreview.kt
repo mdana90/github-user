@@ -13,5 +13,5 @@ fun RepositoryItemPreview() {
         url = "https://github.com/android/nowinandroid",
         stargazersCount = 42
     )
-    RepositoryItem(uiState = sampleRepository)
+    RepositoryItem(uiState = sampleRepository, onClick = {})
 }
