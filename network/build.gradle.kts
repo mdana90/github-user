@@ -6,6 +6,8 @@ plugins {
 
     kotlin("kapt")
     alias(libs.plugins.hilt.android)
+
+    alias(libs.plugins.android.junit5) version libs.versions.androidJUnit5.get()
 }
 
 android {
@@ -58,4 +60,10 @@ dependencies {
     debugImplementation(libs.flipper)
     debugImplementation(libs.flipper.network.plugin)
     releaseImplementation(libs.flipper.android.no.op)
+
+    // Test
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
 }
