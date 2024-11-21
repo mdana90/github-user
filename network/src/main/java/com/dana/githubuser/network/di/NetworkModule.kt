@@ -24,6 +24,8 @@ import javax.inject.Singleton
 internal object NetworkModule {
 
     private const val CONNECTION_TIMEOUT = 10L
+    private const val ACCEPT_VALUE = "application/vnd.github+json"
+    private const val API_VERSION = "2022-11-28"
 
     @Provides
     @Singleton
@@ -45,6 +47,14 @@ internal object NetworkModule {
     @Singleton
     fun providesHttpClient(flipperInterceptor: FlipperOkhttpInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor {
+                val request = it.request().newBuilder()
+                    .addHeader("Accept", ACCEPT_VALUE)
+                    .addHeader("X-GitHub-Api-Version", API_VERSION)
+                    .addHeader("Authorization", "Bearer ${BuildConfig.API_KEY}")
+                    .build()
+                it.proceed(request)
+            }
             .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
