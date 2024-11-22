@@ -10,6 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+/**
+ * Displays a footer with a loading indicator.
+ *
+ * @param modifier Modifier for the Box.
+ */
 @Composable
 fun LoadMoreFooter(modifier: Modifier = Modifier) {
     Box(

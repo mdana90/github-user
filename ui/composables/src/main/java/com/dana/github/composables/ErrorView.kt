@@ -15,6 +15,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
+/**
+ * Displays an error message with a retry button.
+ *
+ * @param modifier The modifier to be applied to the Box.
+ * @param message The error message to be displayed.
+ * @param onRetryClicked Function called when the retry button is clicked.
+ */
 @Composable
 fun ErrorView(modifier: Modifier = Modifier, message: String, onRetryClicked: () -> Unit) {
     Box(

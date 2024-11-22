@@ -12,6 +12,16 @@ import com.skydoves.landscapist.coil.CoilImage
 import com.skydoves.landscapist.components.rememberImageComponent
 import com.skydoves.landscapist.placeholder.placeholder.PlaceholderPlugin
 
+/**
+ * Displays an image from a network URL with placeholder and error images.
+ *
+ * @param modifier Modifier for the image.
+ * @param contentScale The scaling method for the image content.
+ * @param placeholderDrawableRes Resource ID for the placeholder image.
+ * @param errorDrawableRes Resource ID for the error image.
+ * @param imageUrl The URL of the image to load.
+ * @param contentDescription The content description for accessibility.
+ */
 @Composable
 fun NetworkImage(
     modifier: Modifier = Modifier,

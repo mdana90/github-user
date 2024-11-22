@@ -12,6 +12,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 
+/**
+ * Displays a lazy column with endless scrolling capability.
+ *
+ * @param modifier Modifier for the LazyColumn.
+ * @param listState State to control or observe the list's state.
+ * @param loadMore Function to be called when load more.
+ * @param isLoadingMoreData Indicating whether more data is currently being loaded.
+ * @param divider Divider between items.
+ * @param items Items to be displayed in the list.
+ */
 @Composable
 fun EndlessLazyColumn(
     modifier: Modifier = Modifier,
