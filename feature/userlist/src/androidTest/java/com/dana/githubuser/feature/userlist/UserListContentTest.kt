@@ -15,7 +15,7 @@ class UserListContentTest {
     @Test
     fun userListContent_success() {
         composeTestRule.setContent {
-            UserListContent(uiState = ContentUIState.Success(initialUsers))
+            UserListContent(uiState = UserListContentUIState.Success(initialUsers))
         }
 
         composeTestRule.onNodeWithText("username").assertIsDisplayed()
@@ -24,7 +24,7 @@ class UserListContentTest {
     @Test
     fun userListContent_error() {
         composeTestRule.setContent {
-            UserListContent(uiState = ContentUIState.Error(errorMessage))
+            UserListContent(uiState = UserListContentUIState.Error(errorMessage))
         }
 
         composeTestRule.onNodeWithText(errorMessage).assertIsDisplayed()

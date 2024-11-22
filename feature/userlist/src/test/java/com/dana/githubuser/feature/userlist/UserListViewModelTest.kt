@@ -37,10 +37,10 @@ class UserListViewModelTest {
 
         viewModel.refresh()
 
-        assertTrue(viewModel.contentUIState is ContentUIState.Success)
+        assertTrue(viewModel.contentUIState is UserListContentUIState.Success)
         assertIterableEquals(
             initialUsers.map(User::toUIState),
-            (viewModel.contentUIState as ContentUIState.Success).users
+            (viewModel.contentUIState as UserListContentUIState.Success).users
         )
         assertFalse(viewModel.isRefreshing)
         coVerify { userRepository.getUserList(0) }
@@ -53,10 +53,10 @@ class UserListViewModelTest {
 
         viewModel.refresh()
 
-        assertTrue(viewModel.contentUIState is ContentUIState.Success)
+        assertTrue(viewModel.contentUIState is UserListContentUIState.Success)
         assertIterableEquals(
             initialUsers.map(User::toUIState),
-            (viewModel.contentUIState as ContentUIState.Success).users
+            (viewModel.contentUIState as UserListContentUIState.Success).users
         )
         assertFalse(viewModel.isRefreshing)
         coVerify(exactly = 2) { userRepository.getUserList(0) }
@@ -69,8 +69,8 @@ class UserListViewModelTest {
 
         viewModel.refresh()
 
-        assertTrue(viewModel.contentUIState is ContentUIState.Error)
-        assertEquals(error.message, (viewModel.contentUIState as ContentUIState.Error).message)
+        assertTrue(viewModel.contentUIState is UserListContentUIState.Error)
+        assertEquals(error.message, (viewModel.contentUIState as UserListContentUIState.Error).message)
         assertFalse(viewModel.isRefreshing)
         coVerify { userRepository.getUserList(0) }
     }
@@ -92,10 +92,10 @@ class UserListViewModelTest {
 
         viewModel.loadMore()
 
-        assertTrue(viewModel.contentUIState is ContentUIState.Success)
+        assertTrue(viewModel.contentUIState is UserListContentUIState.Success)
         assertIterableEquals(
             initialUsers.map(User::toUIState) + moreUsers.map(User::toUIState),
-            (viewModel.contentUIState as ContentUIState.Success).users
+            (viewModel.contentUIState as UserListContentUIState.Success).users
         )
         assertFalse(viewModel.isLoadingMore)
         coVerify { userRepository.getUserList(1) }

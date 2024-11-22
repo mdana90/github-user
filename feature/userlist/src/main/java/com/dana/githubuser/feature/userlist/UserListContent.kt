@@ -25,7 +25,7 @@ import com.dana.github.composables.ErrorView
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun UserListContent(
     modifier: Modifier = Modifier,
-    uiState: ContentUIState,
+    uiState: UserListContentUIState,
     isRefreshing: Boolean = false,
     isLoadingMore: Boolean = false,
     onRefresh: () -> Unit = {},
@@ -39,7 +39,7 @@ internal fun UserListContent(
         onRefresh = onRefresh
     ) {
         when (uiState) {
-            is ContentUIState.Success -> {
+            is UserListContentUIState.Success -> {
                 UserList(
                     userList = uiState.users,
                     isLoadingMore = isLoadingMore,
@@ -48,7 +48,7 @@ internal fun UserListContent(
                 )
             }
 
-            is ContentUIState.Error -> {
+            is UserListContentUIState.Error -> {
                 ErrorView(
                     modifier = Modifier.align(Alignment.Center),
                     message = uiState.message,

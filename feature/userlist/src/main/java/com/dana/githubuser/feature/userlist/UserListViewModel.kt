@@ -21,7 +21,7 @@ class UserListViewModel @Inject constructor(
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    var contentUIState by mutableStateOf<ContentUIState>(ContentUIState.Success(emptyList()))
+    var contentUIState by mutableStateOf<UserListContentUIState>(UserListContentUIState.Success(emptyList()))
         private set
     var isRefreshing by mutableStateOf(false)
         private set
@@ -47,7 +47,7 @@ class UserListViewModel @Inject constructor(
 
             when (result) {
                 is Result.Success -> {
-                    contentUIState = ContentUIState.Success(result.data.map(User::toUIState))
+                    contentUIState = UserListContentUIState.Success(result.data.map(User::toUIState))
                     canLoadMore = result.data.isNotEmpty()
                     if (result.data.isNotEmpty()) {
                         since = result.data.last().id
@@ -55,10 +55,10 @@ class UserListViewModel @Inject constructor(
                 }
                 is Result.Error -> {
                     contentUIState.let {
-                        if (it is ContentUIState.Success && it.users.isNotEmpty()) {
+                        if (it is UserListContentUIState.Success && it.users.isNotEmpty()) {
                             snackBarMessage = result.message
                         } else {
-                            contentUIState = ContentUIState.Error(result.message)
+                            contentUIState = UserListContentUIState.Error(result.message)
                         }
                     }
                 }
@@ -70,7 +70,7 @@ class UserListViewModel @Inject constructor(
 
     fun loadMore() {
         if (!canLoadMore || isLoadingMore) return
-        val uiState = contentUIState as? ContentUIState.Success ?: return
+        val uiState = contentUIState as? UserListContentUIState.Success ?: return
 
         isLoadingMore = true
         viewModelScope.launch {
@@ -80,7 +80,7 @@ class UserListViewModel @Inject constructor(
 
             when (result) {
                 is Result.Success -> {
-                    contentUIState = ContentUIState.Success(
+                    contentUIState = UserListContentUIState.Success(
                         uiState.users + result.data.map(User::toUIState)
                     )
                     if (result.data.isNotEmpty()) {
