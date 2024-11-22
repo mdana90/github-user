@@ -7,6 +7,9 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
+/**
+ * Interface API endpoints for user-related network operations.
+ */
 interface UserApi {
     @GET(UrlConstants.USER_BY_USERNAME)
     suspend fun getUser(@Path("username") username: String): UserResponse
