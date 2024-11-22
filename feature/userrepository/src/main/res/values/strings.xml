@@ -10,4 +10,8 @@
         <item quantity="one">Following</item>
         <item quantity="other">Followings</item>
     </plurals>
+
+    <string name="profile_name_test_tag">profile_name_test_tag</string>
+    <string name="repository_description_test_tag">repository_description_test_tag</string>
+    <string name="repository_lang_test_tag">repository_lang_test_tag</string>
 </resources>
