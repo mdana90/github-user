@@ -11,6 +11,16 @@ import androidx.compose.ui.unit.dp
 import com.dana.github.composables.EndlessLazyColumn
 import com.dana.github.composables.ErrorView
 
+/**
+ * Displays the user list with pull-to-refresh and load more functionality.
+ *
+ * @param uiState The content UI state.
+ * @param isRefreshing Whether the content is being refreshed.
+ * @param isLoadingMore Whether more content is being loaded.
+ * @param onRefresh Called when the content is refreshed.
+ * @param onLoadMore Called when more content is loaded.
+ * @param onUserClick Called when a user item is clicked.
+ */
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun UserListContent(

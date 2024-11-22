@@ -19,7 +19,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.dana.github.composables.SnackBarEffect
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * Display the user list screen.
+ *
+ * @param viewModel The ViewModel that provides the UI state and actions.
+ * @param onUserClick Called when a user item is clicked.
+ */
 @Composable
 fun UserListScreen(viewModel: UserListViewModel, onUserClick: (String) -> Unit) {
     val snackBarHostState = remember { SnackbarHostState() }

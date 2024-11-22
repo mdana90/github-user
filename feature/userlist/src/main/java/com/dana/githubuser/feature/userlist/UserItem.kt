@@ -20,6 +20,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.dana.github.composables.NetworkImage
 
+/**
+ * Display a user item with an avatar and username.
+ *
+ * @param modifier Modifier for the Row.
+ * @param uiState The user item to be displayed.
+ * @param onClick Function that is invoked when the user item is clicked.
+ */
 @Composable
 fun UserItem(
     modifier: Modifier = Modifier,
