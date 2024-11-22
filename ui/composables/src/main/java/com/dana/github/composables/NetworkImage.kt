@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil.CoilImage
 import com.skydoves.landscapist.components.rememberImageComponent
@@ -17,9 +19,12 @@ fun NetworkImage(
     @DrawableRes placeholderDrawableRes: Int = R.drawable.ic_github_gray,
     @DrawableRes errorDrawableRes: Int = R.drawable.ic_github_gray,
     imageUrl: String,
+    contentDescription: String = ""
 ) {
     CoilImage(
-        modifier = modifier,
+        modifier = modifier.semantics {
+            this.contentDescription = contentDescription
+        },
         imageModel = { imageUrl },
         imageOptions = ImageOptions(
             contentScale = contentScale,
