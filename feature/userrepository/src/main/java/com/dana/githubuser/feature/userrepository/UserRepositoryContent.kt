@@ -22,6 +22,19 @@ import com.dana.githubuser.feature.userrepository.repositorylist.RepositoryUISta
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileSection
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileUIState
 
+/**
+ * Display the user repository content.
+ *
+ * @param modifier Modifier for the layout.
+ * @param userUIState The current UI state of the user profile.
+ * @param repositories The list of repository UI states.
+ * @param isRefreshing Whether the content is being refreshed.
+ * @param isLoadingMore Whether more content is being loaded.
+ * @param showEmptyRepositories Whether to show a message when there are no repositories.
+ * @param onRefresh Called when the content is refreshed.
+ * @param onLoadMore Called when more content is loaded.
+ * @param onRepositoryClick Called when a repository item is clicked.
+ */
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun UserRepositoryContent(

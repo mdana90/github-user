@@ -23,6 +23,12 @@ import androidx.compose.ui.unit.dp
 import com.dana.github.composables.NetworkImage
 import com.dana.githubuser.feature.userrepository.R
 
+/**
+ * Display the user profile section.
+ *
+ * @param modifier Modifier for the layout.
+ * @param uiState The UI state containing user profile information.
+ */
 @Composable
 internal fun UserProfileSection(modifier: Modifier = Modifier, uiState: UserProfileUIState.Success) {
     Column(

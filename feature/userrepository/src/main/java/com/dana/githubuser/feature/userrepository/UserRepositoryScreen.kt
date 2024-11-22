@@ -23,7 +23,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.dana.github.composables.SnackBarEffect
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * Display the user repository screen.
+ *
+ * @param viewModel The ViewModel that provides the UI state and actions.
+ * @param onBackClick Called when the back button is clicked.
+ * @param onRepositoryClick Called when a repository item is clicked.
+ */
 @Composable
 fun UserRepositoryScreen(
     viewModel: UserRepositoryViewModel,

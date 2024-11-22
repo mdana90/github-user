@@ -21,6 +21,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
+/**
+ * Composable function to display a repository item.
+ *
+ * @param modifier Modifier for the layout.
+ * @param uiState The UI state containing repository information.
+ * @param onClick Called when the item is clicked.
+ */
 @Composable
 fun RepositoryItem(
     modifier: Modifier = Modifier,
