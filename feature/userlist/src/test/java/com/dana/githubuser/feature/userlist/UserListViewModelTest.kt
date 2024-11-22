@@ -76,6 +76,15 @@ class UserListViewModelTest {
     }
 
     @Test
+    fun `refresh then hasRefreshedOnce should be true`() = runTest {
+        coEvery { userRepository.getUserList(0) } returns Result.Success(initialUsers)
+
+        viewModel.refresh()
+
+        assertTrue(viewModel.hasRefreshedOnce)
+    }
+
+    @Test
     fun `loadMore success should append users to contentUIState`() = runTest {
         coEvery { userRepository.getUserList(0) } returns Result.Success(initialUsers)
         coEvery { userRepository.getUserList(1) } returns Result.Success(moreUsers)

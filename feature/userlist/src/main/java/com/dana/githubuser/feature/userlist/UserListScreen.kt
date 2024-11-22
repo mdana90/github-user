@@ -49,7 +49,9 @@ fun UserListScreen(viewModel: UserListViewModel, onUserClick: (String) -> Unit) 
     )
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.refresh()
+        if (!viewModel.hasRefreshedOnce) {
+            viewModel.refresh()
+        }
     }
 }
 

@@ -27,6 +27,8 @@ class UserListViewModel @Inject constructor(
         private set
     var isLoadingMore by mutableStateOf(false)
         private set
+    var hasRefreshedOnce by mutableStateOf(false)
+        private set
 
     var snackBarMessage by mutableStateOf<String?>(null)
 
@@ -61,6 +63,7 @@ class UserListViewModel @Inject constructor(
                     }
                 }
             }
+            hasRefreshedOnce = true
             isRefreshing = false
         }
     }
