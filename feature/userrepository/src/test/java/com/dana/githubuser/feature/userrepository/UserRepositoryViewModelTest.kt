@@ -1,7 +1,7 @@
 package com.dana.githubuser.feature.userrepository
 
 import androidx.lifecycle.SavedStateHandle
-import com.dana.githubuser.common_test.CoroutineTestExtension
+import com.dana.githubuser.common_test.extension.CoroutineTestExtension
 import com.dana.githubuser.data.repository.UserRepository
 import com.dana.githubuser.feature.userrepository.repositorylist.RepositoryUIState
 import com.dana.githubuser.feature.userrepository.userprofile.UserProfileUIState

@@ -1,6 +1,6 @@
 package com.dana.githubuser.feature.userlist
 
-import com.dana.githubuser.common_test.CoroutineTestExtension
+import com.dana.githubuser.common_test.extension.CoroutineTestExtension
 import com.dana.githubuser.data.repository.UserRepository
 import com.dana.githubuser.model.Result
 import com.dana.githubuser.model.User

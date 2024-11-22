@@ -1,4 +1,4 @@
-package com.dana.githubuser.common_test
+package com.dana.githubuser.common_test.extension
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
